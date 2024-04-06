@@ -3,10 +3,11 @@
 
 **Deliverables:**
 
-**ConnectFour.py** 
+**ConnectFour.py**
 Game Initialization, sets up game window, and holds game logic
+
 **GameStatus.py**
 Gane Status class encapsulates current state of the game
 
-**Negamax.py **
+**Negamax.py**
 AI Algorithm used to play against the player
