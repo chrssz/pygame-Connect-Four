@@ -48,7 +48,7 @@ class ConnectFour:
             for row in range(self.ROW_COUNT - 1, -1, -1):
                 if self.board[row][column] == 0:
                     # Place the disc in the lowest available row
-                    self.board[row][column] = 2
+                    self.board[row][column] = 1
                     #Draw the red disc on the screen
                     x_center = column * self.cell_width + self.cell_width // 2
                     y_center = row * self.cell_height + self.cell_height // 2
@@ -69,20 +69,26 @@ class ConnectFour:
             for row in range(self.ROW_COUNT - 1, -1, -1):
                 if self.board[row][column] == 0:
                     # Place the disc in the lowest available row
-                    self.board[row][column] = 1
+                    self.board[row][column] = 2
                     #Draw the red disc on the screen
                     x_center = column * self.cell_width + self.cell_width // 2
                     y_center = row * self.cell_height + self.cell_height // 2
                     pygame.draw.circle(self.screen, self.YELLOW, (x_center, y_center), self.RADIUS)
                     pygame.display.update()
                     break
-       
+    #Function to call negamax
+    def play_ai(self) -> None:
+        return
     
+    def play_player(self,mouse_x,mouse_y,column) -> None:
+        #places red disk
+        self.draw_red(column)
+        self.game_state.turn = False
 
     def play_game(self) -> None:
         done = False
         self.game_state = GameStatus(self.board, True)
-
+    
         while not done:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -91,10 +97,18 @@ class ConnectFour:
                     if event.button == 1: #left mouse button is clicked
                         mouse_x, mouse_y = pygame.mouse.get_pos()
                         column = mouse_x // self.SQUARE_SIZE #calculates column index based on mouse position
-                        #place the disc.
-                        self.draw_red(column)
+
+                        #player turn
+                        if self.game_state.turn == True:
+                            self.play_player(mouse_x, mouse_y, column)
+                        #ai turn
+                        else: 
+                            self.draw_yellow(column)
+                            self.game_state.turn = True
+                            
                         self.print_B()
                         #update gameState
+                        
 
     
     #helper function to print out self.board in a clean order
