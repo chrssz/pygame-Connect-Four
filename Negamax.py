@@ -39,5 +39,5 @@ def negaMax(game_state:GameStatus, depth: int, turn_multiplier: int, alpha = flo
 
     # if best move is found return inverted value, best_move; else return inverted value, game_state.get_moves()[0]
     return (-1 * value * turn_multiplier, best_move) if best_move is not None else (-1 * value * turn_multiplier, game_state.get_moves()[0])
-
+    
     

@@ -85,6 +85,7 @@ class ConnectFour:
         self.draw_red(column)
         self.game_state.turn = False
 
+ 
     def play_game(self) -> None:
         done = False
         self.game_state = GameStatus(self.board, True)
@@ -105,8 +106,9 @@ class ConnectFour:
                         else: 
                             self.draw_yellow(column)
                             self.game_state.turn = True
-                            
+                        
                         self.print_B()
+                        self.game_state.get_negaMax_score()
                         #update gameState
                         
 

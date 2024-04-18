@@ -39,11 +39,48 @@ class GameStatus:
         
         return True
     #Look for four in a rows.
-    def get_negaMax_score(self):
-        #Iterate through self.board in reverse order?
-            #Worst Case scenario is connect 4 is at the top of the board.
-        
-        return 
+    def get_negaMax_score(self) -> int:
+        scores = {0:0,1:0,2:0} # keep track of scores
+        # Check for four in rows horizontally
+        for x in range(self.ROW_COUNT):
+            for y in range(self.COL_COUNT - 3):
+                if (
+                    self.board_state[x][y] == self.board_state[x][y+1] ==
+                    self.board_state[x][y+2] == self.board_state[x][y+3]):
+                    print("Four in a row horizontally found")
+                    scores[self.board_state[x][y]] += 100
+
+        # Check for four in rows vertically
+        for x in range(self.ROW_COUNT - 3):
+            for y in range(self.COL_COUNT):
+                if (
+                    self.board_state[x][y] == self.board_state[x+1][y] ==
+                    self.board_state[x+2][y] == self.board_state[x+3][y]):
+                    print("Four in a row vertically found")
+                    scores[self.board_state[x][y]] += 100
+
+        # Check for four in rows diagonally (bottom-left to top-right)
+        for x in range(self.ROW_COUNT - 3):
+            for y in range(self.COL_COUNT - 3):
+                if (
+                    self.board_state[x][y] == self.board_state[x+1][y+1] ==
+                    self.board_state[x+2][y+2] == self.board_state[x+3][y+3]):
+                    print("Four in a row diagonally (bottom-left to top-right) found")
+                    scores[self.board_state[x][y]] += 100
+
+        # Check for four in rows diagonally (top-left to bottom-right)
+        for x in range(3, self.ROW_COUNT):
+            for y in range(self.COL_COUNT - 3):
+                if (
+                    self.board_state[x][y] == self.board_state[x-1][y+1] ==
+                    self.board_state[x-2][y+2] == self.board_state[x-3][y+3]):
+                    print("Four in a row diagonally (top-left to bottom-right) found")
+                    scores[self.board_state[x][y]] += 100
+
+        return scores[1] - scores[2]
+                    
+            
+    
     
         
 
