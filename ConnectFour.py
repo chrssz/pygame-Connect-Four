@@ -24,7 +24,8 @@ class ConnectFour:
         self.RADIUS = 45 #Radius of discs
         self.cell_width = 100
         self.cell_height = 100
-       
+        #Depth for negamax
+        self.depth = 5
         
     #function responsible for drawing game to screen
     def draw_game(self) -> None:
@@ -56,10 +57,6 @@ class ConnectFour:
                     pygame.display.update()
                     break
   
-
-    
-        
-    
     
     #draws yellow disc at given position
     def draw_yellow(self,column) -> None:
@@ -78,12 +75,16 @@ class ConnectFour:
                     break
     #Function to call negamax
     def play_ai(self) -> None:
+        #Params def negaMax(game_state:GameStatus, depth: int, turn_multiplier: int, alpha = float('-inf'), beta=float('inf')) -> tuple[int,tuple]:
+        score, bestMove = negaMax(self.game_state,self.depth ,1)
+        column = bestMove[1]
+        self.draw_yellow(column)
         return
     
-    def play_player(self,mouse_x,mouse_y,column) -> None:
+    def play_player(self,column) -> None:
         #places red disk
         self.draw_red(column)
-        self.game_state.turn = False
+
 
  
     def play_game(self) -> None:
@@ -98,14 +99,14 @@ class ConnectFour:
                     if event.button == 1: #left mouse button is clicked
                         mouse_x, mouse_y = pygame.mouse.get_pos()
                         column = mouse_x // self.SQUARE_SIZE #calculates column index based on mouse position
-
                         #player turn
                         if self.game_state.turn == True:
-                            self.play_player(mouse_x, mouse_y, column)
+                            self.play_player(column)
+                            self.game_state.turn = False 
                         #ai turn
                         else: 
-                            self.draw_yellow(column)
-                            self.game_state.turn = True
+                            self.play_ai() #call Play_ai
+                            self.game_state.turn = True 
                         
                         self.print_B()
                         self.game_state.get_negaMax_score()

@@ -47,7 +47,6 @@ class GameStatus:
                 if (
                     self.board_state[x][y] == self.board_state[x][y+1] ==
                     self.board_state[x][y+2] == self.board_state[x][y+3]):
-                    print("Four in a row horizontally found")
                     scores[self.board_state[x][y]] += 100
 
         # Check for four in rows vertically
@@ -56,7 +55,6 @@ class GameStatus:
                 if (
                     self.board_state[x][y] == self.board_state[x+1][y] ==
                     self.board_state[x+2][y] == self.board_state[x+3][y]):
-                    print("Four in a row vertically found")
                     scores[self.board_state[x][y]] += 100
 
         # Check for four in rows diagonally (bottom-left to top-right)
@@ -65,7 +63,6 @@ class GameStatus:
                 if (
                     self.board_state[x][y] == self.board_state[x+1][y+1] ==
                     self.board_state[x+2][y+2] == self.board_state[x+3][y+3]):
-                    print("Four in a row diagonally (bottom-left to top-right) found")
                     scores[self.board_state[x][y]] += 100
 
         # Check for four in rows diagonally (top-left to bottom-right)
@@ -74,7 +71,6 @@ class GameStatus:
                 if (
                     self.board_state[x][y] == self.board_state[x-1][y+1] ==
                     self.board_state[x-2][y+2] == self.board_state[x-3][y+3]):
-                    print("Four in a row diagonally (top-left to bottom-right) found")
                     scores[self.board_state[x][y]] += 100
 
         return scores[1] - scores[2]

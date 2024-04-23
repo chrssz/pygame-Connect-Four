@@ -4,7 +4,7 @@ def negaMax(game_state:GameStatus, depth: int, turn_multiplier: int, alpha = flo
     #first we check if game is terminal or depth = 0
     terminal = game_state.is_terminal()
     if depth == 0 or terminal:
-        scores = game_state.get_negamax_scores(terminal) #grab the scores and return (will propagate back up)
+        scores = game_state.get_negaMax_score() #grab the scores and return (will propagate back up)
         return scores, None
     
     best_move = None
